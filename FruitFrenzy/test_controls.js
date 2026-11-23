@@ -9,6 +9,8 @@
 //   D  debug overlay            P  pause / unpause
 //   F  launch a fruit           B  launch a bomb
 //   T  skip 30 seconds ahead in the difficulty ramp
+//   1  launch a mushroom          2  launch a ginger
+//   3  launch a habanero          4  launch a banana
 
 const TEST_CLICK_RADIUS = 4;   // how forgiving a click is, in pixels
 
@@ -63,14 +65,20 @@ function handleTestKeys(k) {
   if (k === "f") launchObject("fruit");
   if (k === "b") launchObject("bomb");
   if (k === "t") gameState.elapsed += 30;
+  if (k === "1") launchObject("mushroom");
+  if (k === "2") launchObject("ginger");
+  if (k === "3") launchObject("habanero");
+  if (k === "4") launchObject("banana");
 }
 
 function drawTestOverlay() {
   noStroke();
-  fill(200);
+  fill(0, 0, 0, 140);
+  rect(0, height - 32, width, 32);
+  fill(220);
   textSize(13);
   textAlign(RIGHT, BOTTOM);
-  let status = "R restart  D debug  S slow  P pause  F fruit  B bomb  T +30s";
+  let status = "R restart  D debug  S slow  P pause  F fruit  B bomb  T +30s  1-4 specials";
   if (testSlowMotion) status = "[SLOW]  " + status;
   if (testPaused) status = "[PAUSED]  " + status;
   status = "[" + HIT_MODE + " mode]  " + status;

@@ -32,6 +32,7 @@ FruitFrenzy/               repo root
     index.html             loads p5 and the tabs, managed by Processing
     sketch.properties      tells Processing this is a p5.js mode sketch
     libraries/p5.min.js    p5.js 1.5.0, included so it works offline
+    assets/kente.jpg       background image (the game draws its own kente if it is missing)
 ```
 
 ## How the parts connect
@@ -68,3 +69,23 @@ const HIT_MODE = "blade";
 | P | pause |
 | F / B | launch a fruit / a bomb |
 | T | skip 30 seconds ahead in the difficulty ramp |
+| 1 / 2 / 3 / 4 | launch a mushroom / ginger / habanero / banana |
+
+## Special items
+
+Special items start showing up after 10 seconds. Letting one fall is never a miss. Slicing one triggers its effect:
+
+| Item | Type | Effect when sliced |
+| --- | --- | --- |
+| Mushroom | bad | Hallucination for 6 s: psychedelic spinning background, the play area sways, fruit wobble and change color, fake copies appear, but the real hit circles stay put |
+| Ginger | bad | Everything moves 1.6x faster for 5 s |
+| Habanero | bad | Fire rush: 5 extra fruit and a bomb launch at once |
+| Banana | good | Slow motion for 5 s, plus 2 bonus points |
+
+All the numbers are in `GAME_SETTINGS` at the top of `game.js`.
+
+## Background
+
+The background is kente cloth (Step 8 in `game.js`), darkened so the fruit stand out. Change `kenteDarkness` in `GAME_SETTINGS` to make it brighter (lower number) or darker (higher number).
+
+The game draws `FruitFrenzy/assets/kente.jpg` as the background. It is already made at 1600 x 1200 (twice the 800 x 600 canvas, so it stays sharp on Retina screens). To change it, replace that file with another 1600 x 1200 image named `kente.jpg` or `kente.png`. If the file is missing, the game falls back to its own drawn kente pattern.
